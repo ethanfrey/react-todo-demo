@@ -3,13 +3,9 @@ import {Router, Route, IndexRoute} from 'react-router'
 import createBrowserHistory from 'history/lib/createBrowserHistory'
 
 var history = createBrowserHistory();
-
-var Main = require('./components/main');
-var Hello = require('./components/hello');
-
-var Index = React.createClass({
-  render() { return <Hello name="Index"/>; }
-})
+import Main from './components/main'
+import Hello from './components/hello'
+import ModalDemo from './components/modal-demo'
 
 var One = React.createClass({
   render() { return <Hello name="Page One"/>; }
@@ -22,7 +18,7 @@ var Two = React.createClass({
 module.exports = (
   <Router history={history}>
     <Route path="/" component={Main}>
-      <IndexRoute component={Index} />
+      <IndexRoute component={ModalDemo} />
       <Route path="one" component={One} />
       <Route path="two" component={Two} />
     </Route>
