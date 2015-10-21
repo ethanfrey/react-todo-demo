@@ -1,4 +1,4 @@
-var ReactDOM = require('react-dom');
-var Routes = require('./routes');
+import ReactDOM from 'react-dom'
+import Routes from './routes'
 
 ReactDOM.render(Routes, document.querySelector('.container'));

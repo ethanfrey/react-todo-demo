@@ -1,10 +1,8 @@
-var React = require('react');
-var ReactRouter = require('react-router');
-var createBrowserHistory = require('history/lib/createBrowserHistory');
+import React from 'react'
+import {Router, Route, IndexRoute} from 'react-router'
+import createBrowserHistory from 'history/lib/createBrowserHistory'
+
 var history = createBrowserHistory();
-var Router = ReactRouter.Router;
-var Route = ReactRouter.Route;
-var IndexRoute = ReactRouter.IndexRoute;
 
 var Main = require('./components/main');
 var Hello = require('./components/hello');

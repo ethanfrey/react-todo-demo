@@ -42,7 +42,7 @@ var notify = function(error) {
 function compile(watch) {
   var bundler = browserify({
     entries: ['./src/app.jsx'],
-    transform: [reactify, babel],
+    transform: [babel, reactify],
     extensions: ['.jsx'],
     debug: true,
     cache: {},
