@@ -72,9 +72,8 @@ function compile(watch) {
 function lint() {
   return gulp.src('./src/**/*.jsx')
     .pipe(eslint())
-    .pipe(eslint.failAfterError())
     .pipe(eslint.formatEach('compact', process.stderr))
-    .on('error', notify);
+    .pipe(eslint.failOnError());
 }
 
 function serve(done) {

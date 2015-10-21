@@ -10,8 +10,7 @@ module.exports = React.createClass({
         <NavBrand>Todo App</NavBrand>
         <Nav>
           <IndexLinkContainer to="/"><NavItem>Index</NavItem></IndexLinkContainer>
-          <LinkContainer to="/one"><NavItem>One</NavItem></LinkContainer>
-          <LinkContainer to="/two"><NavItem>Two</NavItem></LinkContainer>
+          <LinkContainer to="/about"><NavItem>About</NavItem></LinkContainer>
         </Nav>
       </Navbar>
     );
