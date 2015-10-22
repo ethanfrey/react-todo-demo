@@ -12,7 +12,7 @@ module.exports = React.createClass({
   ],
   getInitialState() {
     return {
-      items: [{title: "placeholder", done: false, id: 1}]
+      items: []
     }
   },
   onChange(event, data) {

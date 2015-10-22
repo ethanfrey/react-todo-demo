@@ -50,6 +50,13 @@ module.exports = Reflux.createStore({
     // TODO: check the server in the future, now just send the state
     this.triggerChange();
   },
+  updateItem(id, title) {
+    let match = this.data.find(x => x.id === id)
+    if (match) {
+      match.title = title;
+      this.triggerChange();
+    }
+  },
   triggerChange() {
     this.trigger('change', this.data);
   }
