@@ -1,5 +1,5 @@
 import React from 'react'
-
+import {Grid} from 'react-bootstrap'
 import Navbar from './navbar'
 
 module.exports = React.createClass({
@@ -8,7 +8,9 @@ module.exports = React.createClass({
     return (
       <div>
         <Navbar />
-        {this.props.children}
+        <Grid>
+          {this.props.children}
+        </Grid>
       </div>
     );
   }

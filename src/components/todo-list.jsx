@@ -1,6 +1,6 @@
 import React from 'react'
 import Reflux from 'reflux'
-import {ListGroup} from 'react-bootstrap'
+import {ListGroup, Panel} from 'react-bootstrap'
 
 import TodoItem from './todo-item'
 import TodoStore from '../stores/todo-store'
@@ -16,15 +16,15 @@ module.exports = React.createClass({
     }
   },
   onChange(event, data) {
-    console.log(event);
-    console.log(data);
     this.setState({items: data});
   },
   render() {
     return (
-      <ListGroup>
-        {this.state.items.map(item => <TodoItem key={item.id} {...item}/> )}
-      </ListGroup>
+      <Panel header="Todo Items">
+        <ListGroup fill>
+          {this.state.items.map(item => <TodoItem key={item.id} {...item}/> )}
+        </ListGroup>
+      </Panel>
     );
   }
 });

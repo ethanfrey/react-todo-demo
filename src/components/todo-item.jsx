@@ -1,5 +1,5 @@
 import React from 'react'
-import {ListGroupItem} from 'react-bootstrap'
+import {ListGroupItem, Glyphicon} from 'react-bootstrap'
 
 import Actions from '../actions'
 
@@ -11,8 +11,9 @@ module.exports = React.createClass({
   },
   render() {
     return (
-      <ListGroupItem active={!this.props.done} onClick={this.toggle}>
-        {this.props.title}
+      <ListGroupItem bsStyle={this.props.done ? "info" : "warning"} onClick={this.toggle} href="#">
+        {this.props.done ? <Glyphicon glyph="ok" /> : ""} <span>{this.props.title}</span>
+        <Glyphicon glyph="pencil" className="pull-right" />
       </ListGroupItem>
     );
   }
