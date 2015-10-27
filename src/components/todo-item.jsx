@@ -1,10 +1,10 @@
-import React from 'react'
+import React, {Component} from 'react'
 import InlineEdit from 'react-edit-inline'
 import {ListGroupItem, Glyphicon} from 'react-bootstrap'
 
 import Actions from '../actions'
 
-class MyInlineEdit extends InlineEdit {
+export class MyInlineEdit extends InlineEdit {
   // patched, so the toggle won't be triggered when starting editing
   startEditing(e) {
     e.stopPropagation();
@@ -12,17 +12,22 @@ class MyInlineEdit extends InlineEdit {
   }
 };
 
-module.exports = React.createClass({
-  displayName: "Todo-Item",
+export default class TodoItem extends Component {
+  constructor(props) {
+    super(props);
+    this.startEdit = this.startEdit.bind(this);
+    this.toggle = this.toggle.bind(this);
+    this.itemChanged = this.itemChanged.bind(this);
+  }
   toggle(e) {
     Actions.toggleItem(this.props.cat_id, this.props.id);
-  },
+  }
   itemChanged(data) {
     Actions.updateItem(this.props.cat_id, this.props.id, data.title);
-  },
+  }
   startEdit(e) {
     this.refs.editor.startEditing(e);
-  },
+  }
   render() {
     return (
       <ListGroupItem bsStyle={this.props.done ? "info" : "warning"} onClick={this.toggle} href="#">
@@ -32,4 +37,5 @@ module.exports = React.createClass({
       </ListGroupItem>
     );
   }
-});
+}
+TodoItem.displayName = "Todo-Item";

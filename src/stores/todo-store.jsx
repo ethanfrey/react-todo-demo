@@ -72,6 +72,13 @@ module.exports = Reflux.createStore({
       this.triggerChange(cat_id);
     }
   },
+  updateCat(cat_id, title) {
+    let cat = this.getCat(cat_id);
+    if (cat) {
+      cat.title = title;
+      this.triggerChange(cat_id);
+    }
+  },
   triggerChange(cat_id) {
     if (cat_id) {
       this.trigger('change', cat_id, this.getCat(cat_id));
