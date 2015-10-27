@@ -15,10 +15,10 @@ class MyInlineEdit extends InlineEdit {
 module.exports = React.createClass({
   displayName: "Todo-Item",
   toggle(e) {
-    Actions.toggleItem(this.props.id);
+    Actions.toggleItem(this.props.cat_id, this.props.id);
   },
   itemChanged(data) {
-    Actions.updateItem(this.props.id, data.title);
+    Actions.updateItem(this.props.cat_id, this.props.id, data.title);
   },
   startEdit(e) {
     this.refs.editor.startEditing(e);

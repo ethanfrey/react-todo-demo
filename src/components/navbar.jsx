@@ -11,6 +11,7 @@ module.exports = React.createClass({
         <Nav>
           <IndexLinkContainer to="/"><NavItem>Index</NavItem></IndexLinkContainer>
           <LinkContainer to="/about"><NavItem>About</NavItem></LinkContainer>
+          <LinkContainer to="/list/1"><NavItem>Cat 1</NavItem></LinkContainer>
         </Nav>
       </Navbar>
     );

@@ -1,63 +1,84 @@
-var Reflux = require('reflux');
-var Actions = require('../actions');
-
-
-let baseItems = [
-  {
-    title: "Sleep",
-    done: true,
-    id: 1
-  },
-  {
-    title: "Eat",
-    done: false,
-    id: 2
-  },
-  {
-    title: "Have Fun",
-    done: false,
-    id: 3
-  }
-];
+import Reflux from 'reflux';
+import Actions from '../actions';
+import {twoCategories} from '../fixtures/data'
 
 
 module.exports = Reflux.createStore({
   listenables: [Actions],
   init() {
-    this.data = baseItems;
-    this.maxId = 3;
+    this.data = twoCategories;
+    this.maxItemId = 5;
+    this.maxCatId = 102;
   },
-  addItem(item) {
+  getCat(cat_id) {
+    return this.data.find(cat => cat.id == cat_id);
+  },
+  getItem(cat_id, id) {
+    cat = this.getCat(cat_id);
+    if (cat) {
+      console.log('searching for item ', id);
+      return cat.items.find(x => x.id == id);
+    } else {
+      console.log('found no cat ', cat_id, id);
+      return cat;
+    }
+  },
+  addCat(cat) {
     this.data.push({
-      title: item.title,
-      done: item.done,
-      id: ++this.maxId
+      title: cat.title,
+      id: ++this.maxCatId,
+      items: []
     });
-    this.triggerChange();
+    this.triggerChange(nil);
   },
-  clearDone() {
-    this.data = this.data.filter(item => !item.done);
-    this.triggerChange();
+  addItem(cat_id, item) {
+    cat = this.getCat(cat_id);
+    if (cat) {
+      cat.items.push({
+        title: item.title,
+        done: item.done,
+        id: ++this.maxItemId
+      });
+      this.triggerChange(cat_id);
+    } else {
+      console.log('add to non-existant category', cat_id);
+    }
   },
-  toggleItem(id) {
-    let match = this.data.find(x => x.id === id)
+  clearDone(cat_id) {
+    let cat = this.getCat(cat_id);
+    if (cat) {
+      console.log("filtering done for category", cat_id);
+      cat.items = cat.items.filter(item => !item.done);
+      this.triggerChange(cat_id);
+    } else {
+      console.log('add to non-existant category', cat_id);
+    }
+  },
+  toggleItem(cat_id, id) {
+    let match = this.getItem(cat_id, id);
     if (match) {
       match.done = !match.done;
-      this.triggerChange();
+      this.triggerChange(cat_id);
     }
   },
   refresh() {
     // TODO: check the server in the future, now just send the state
     this.triggerChange();
   },
-  updateItem(id, title) {
-    let match = this.data.find(x => x.id === id)
+  updateItem(cat_id, id, title) {
+    let match = this.getItem(cat_id, id);
     if (match) {
       match.title = title;
-      this.triggerChange();
+      this.triggerChange(cat_id);
     }
   },
-  triggerChange() {
-    this.trigger('change', this.data);
+  triggerChange(cat_id) {
+    if (cat_id) {
+      this.trigger('change', cat_id, this.getCat(cat_id));
+    } else {
+      for (let cat of this.data) {
+        this.trigger('change', cat.id, cat);
+      }
+    }
   }
 });

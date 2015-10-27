@@ -28,16 +28,17 @@ module.exports = React.createClass({
   //   }
   // },
 
+  catId() {
+    return (+ this.props.params.cat_id);
+  },
   open() {
     this.setState({showModal: true});
   },
   close() {
     this.setState({showModal: false});
   },
-
-
   clear() {
-    Actions.clearDone();
+    Actions.clearDone(this.catId());
   },
   render() {
     // TODO: break modal into own package, send actions, auto-focus field on show
@@ -45,7 +46,7 @@ module.exports = React.createClass({
       <div>
         <Row>
           <Col xs={12} md={6}>
-            <TodoList />
+            <TodoList cat_id={this.catId()} />
           </Col>
         </Row>
         <Row>
@@ -59,7 +60,7 @@ module.exports = React.createClass({
           </Col>
         </Row>
 
-        <CreateTodoModal show={this.state.showModal} onHide={this.close} />
+        <CreateTodoModal show={this.state.showModal} onHide={this.close} cat_id={this.catId()} />
       </div>
     );
   }

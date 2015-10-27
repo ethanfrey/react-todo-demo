@@ -12,17 +12,21 @@ module.exports = React.createClass({
   ],
   getInitialState() {
     return {
-      items: []
+      items: [],
+      title: ""
     }
   },
-  onChange(event, data) {
-    this.setState({items: data});
+  onChange(event, cat_id, data) {
+    if (cat_id === this.props.cat_id) {
+      this.setState({items: data.items, title: data.title});
+    }
   },
   render() {
+    let cat_id = this.props.cat_id;
     return (
-      <Panel header="Todo Items">
+      <Panel header={this.state.title + " Todos"}>
         <ListGroup fill>
-          {this.state.items.map(item => <TodoItem key={item.id} {...item}/> )}
+          {this.state.items.map(item => <TodoItem key={item.id} cat_id={cat_id} {...item} /> )}
         </ListGroup>
       </Panel>
     );

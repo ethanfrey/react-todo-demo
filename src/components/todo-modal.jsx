@@ -33,7 +33,7 @@ var CreateTodoModal = React.createClass({
   create() {
     let title = this.state.newTitle;
     if (title) {
-      Actions.addItem({title: title, done: false});
+      Actions.addItem(this.props.cat_id, {title: title, done: false});
       this.setState({newTitle: ''});
     }
   },
